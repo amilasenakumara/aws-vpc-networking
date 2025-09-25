@@ -5,6 +5,8 @@
 
 So let's start this course.
 
+[overview of VPC and AWS networking services]()
+
 Now I want to start this course with overview of VPC and AWS networking services.
 
 And this is always good practice to first see a big picture.
@@ -179,7 +181,7 @@ And now if user in their browser hits example.com it will return that IP address
 And then user browser will then connect to this machine.
 
 So this is how a DNS resolution happens okay. So far so good.
-
+💻💻 
 
 
 Now you must be wondering if there is just this main route table.
