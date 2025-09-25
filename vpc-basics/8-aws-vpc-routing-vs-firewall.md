@@ -30,7 +30,7 @@ Before diving into **VPC Firewalls** (Security Groups & NACLs), it’s essential
 - **Car → IP Packet** (data traveling in the network).  
 - **Visa/Identity Check → Permissions & Rules** that decide if access is allowed.
 
-[car]() vs [IP packet]()
+##Diagram [car](https://github.com/amilasenakumara/aws-vpc-networking/blob/563b1aff203cacbf791417440942bda3a304b809/images/vpc-routing-firewall-analogy.png) vs [IP packet](https://github.com/amilasenakumara/aws-vpc-networking/blob/563b1aff203cacbf791417440942bda3a304b809/images/vpc-routing-firewall.png)
 
 ---
 
