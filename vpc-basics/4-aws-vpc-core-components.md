@@ -1,5 +1,7 @@
 # AWS VPC Core Components – Learning Notes ☁️
 
+🔗 [VPC building blocks](https://github.com/amilasenakumara/aws-vpc-networking/blob/9ded06a41f980b6c90c5273505f29fe0b693281d/images/vpc-building-block.png)
+
 This repository contains **organized notes on the core components of AWS VPC** for easier understanding and documentation.  
 Purpose: Understand VPC building blocks, connectivity, and security for deploying secure cloud networks.
 
