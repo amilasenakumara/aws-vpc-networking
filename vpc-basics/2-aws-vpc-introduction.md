@@ -54,4 +54,5 @@ Purpose: Understand how on-premises networks translate to AWS VPC networks.
 
 ---
 
-*Created for personal learning purposes from Udemy AWS course.*
+🔗 [Physical on premises network vs VPC](https://github.com/amilasenakumara/aws-vpc-networking/blob/d7d7c4d81c635bc08e0f3e3aab6d3562a2ffecec/images/physical-cloud.png)
+

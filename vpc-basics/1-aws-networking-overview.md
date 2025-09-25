@@ -2,6 +2,7 @@
 
 This document summarizes key concepts of **AWS networking**, **VPC**, and related services for easier understanding and documentation.
 
+🔗 [Which AWS network services you should know?](https://github.com/amilasenakumara/aws-vpc-networking/blob/d7d7c4d81c635bc08e0f3e3aab6d3562a2ffecec/images/aws-networking-services.png)
 ---
 
 ## 🌐 Big Picture of AWS Networking
@@ -9,7 +10,7 @@ This document summarizes key concepts of **AWS networking**, **VPC**, and relate
 - AWS networking allows you to **deploy applications securely** in the cloud.  
 - Always start with a **high-level overview** before diving into individual components.  
 - Revisit this overview after learning to **connect all dots visually**.  
-
+- [Big Picture of AWS Networking](https://github.com/amilasenakumara/aws-vpc-networking/blob/d7d7c4d81c635bc08e0f3e3aab6d3562a2ffecec/images/course-overview.png)
 ---
 
 ## 🏗️ Basic Deployment Scenario
