@@ -45,6 +45,20 @@ Purpose: Understand the behavior, scope, and use cases of different IP address t
 
 ---
 
+# Private, Public and Elastic IP (EIP) 📊
+
+| Feature                  | Private IP                                                                 | Public IP                                                                                     | Elastic IP (EIP)                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Communication**        | Communication within VPC                                                   | Can communicate over internet                                                                 | Can communicate over internet                                                     |
+| **Address range**        | Gets IP address from subnet range. <br>Ex: `10.200.0.1`                     | Gets IP address from Amazon Pool within region                                                 | Gets IP address from Amazon Pool within region                                    |
+| **Instance stop/start**  | Once assigned cannot be changed                                             | Changes over instance stop and start <br>(not on instance OS reboot)                          | Do not change over instance stop and start                                        |
+| **Releasing IP**         | Released when instance is terminated                                        | Released to pool when instance is stopped or terminated                                       | Not released. Remains in your account. <br>(Billed)                               |
+| **Automatic Assignment** | Receives private IP on launch of EC2 instance                               | Receives public IP on launch of EC2 instance if *Public IP addressing attribute* is set to true for subnet | Have to explicitly allocate and attach EIP to EC2 instance. <br>Can be reattached to other EC2 |
+| **Examples**             | Application servers, databases                                              | Web servers, Load Balancers, Websites                                                         | Web servers, Load Balancers, Websites                                             |
+
+
+---
+
 ## 5️⃣ IPv6 Addresses
 - **128-bit addresses**, written in hexadecimal (8 blocks of 16 bits).  
 - VPC prefix → `/56`, Subnet prefix → `/64`.  
