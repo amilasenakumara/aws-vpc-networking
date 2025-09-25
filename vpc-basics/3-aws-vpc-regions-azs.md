@@ -78,6 +78,45 @@ Purpose: Understand **VPC scope** and its relationship with AWS accounts, region
 
 ---
 
-*Created for personal learning purposes from Udemy AWS course.*
+*AWS Networking Notes – Organized and Documented.*
 
 
+## 📝 Exam Questions & Answers – AWS VPC, Regions, and AZs
+
+1. **Q:** Can a single VPC span multiple AWS regions?  
+   **A:** No, a VPC is a regional resource. To use multiple regions, you must create separate VPCs in each region and connect them via VPC Peering or Transit Gateway.
+
+2. **Q:** What determines the number of Availability Zones in a region?  
+   **A:** Each region has multiple physically separated AZs to provide high availability, redundant power, and disaster resilience. The exact number varies per region.
+
+3. **Q:** How are subnets related to AZs?  
+   **A:** Subnets define which AZ resources (like EC2 instances) reside in. To deploy resources across multiple AZs, create multiple subnets mapped to each AZ.
+
+4. **Q:** What is the default VPC limit per region, and why might you create multiple VPCs?  
+   **A:** The default limit is 5 VPCs per region. Multiple VPCs can be created to isolate applications logically, e.g., separate VPCs for Finance and AI applications.
+
+5. **Q:** Give examples of AWS service scopes and their levels.  
+   **A:**  
+   - AZ-level: EC2, RDS  
+   - VPC-level: ELB  
+   - Regional-level: S3  
+   - Global-level: Route 53, IAM, Billing  
+
+---
+
+## 💼 Interview Questions & Answers – AWS VPC, Regions, and AZs
+
+1. **Q:** Explain why a VPC cannot span multiple regions.  
+   **A:** A VPC is a regional resource designed to operate within a single region. Cross-region communication requires creating separate VPCs and connecting them via VPC Peering or Transit Gateway.
+
+2. **Q:** How do you ensure high availability for resources deployed in a VPC?  
+   **A:** Deploy resources across multiple subnets in different AZs within the VPC to ensure redundancy and availability if one AZ fails.
+
+3. **Q:** What is the relationship between AWS accounts, regions, and VPCs?  
+   **A:** An AWS account is the top-level entity. Within an account, multiple regions exist. Each region can host one or more VPCs, and each VPC contains subnets mapped to AZs.
+
+4. **Q:** How do you choose the appropriate region for deploying your VPC?  
+   **A:** Consider factors such as proximity to users (latency), data residency requirements, compliance, and cost differences across regions.
+
+5. **Q:** Describe the difference between AZ-level and global-level services.  
+   **A:** AZ-level services (EC2, RDS) exist in a specific AZ. Global-level services (Route 53, IAM) operate across all regions and accounts, providing centralized management and global reach.

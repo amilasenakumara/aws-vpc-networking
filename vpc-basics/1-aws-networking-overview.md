@@ -124,3 +124,41 @@ This document summarizes key concepts of **AWS networking**, **VPC**, and relate
 - Understanding VPC, subnets, routing, and gateways is critical for designing resilient architectures  
 - Services like **ALB, NAT Gateway, VPC Endpoints, CloudFront, and Direct Connect** enhance performance, cost-efficiency, and private connectivity  
 - Revisit this overview after completing the course to solidify your understanding  
+
+*AWS Networking Notes – Organized and Documented.*
+
+## 📝 Exam Questions & Answers
+
+1. **Q:** What is a VPC in AWS?  
+   **A:** A Virtual Private Cloud (VPC) is a private network space in AWS, similar to an on-premises network, used to launch EC2 instances, databases, and other resources.
+
+2. **Q:** What is the purpose of an Internet Gateway (IGW)?  
+   **A:** An IGW connects a VPC to the internet, allowing public instances to receive and send traffic.
+
+3. **Q:** How does a NAT Gateway differ from an Internet Gateway?  
+   **A:** NAT Gateway allows **outbound internet access** for private instances, while IGW allows **both inbound and outbound traffic** for public instances.
+
+4. **Q:** What is the role of subnets in a VPC?  
+   **A:** Subnets divide the VPC address space into smaller segments and map them to specific Availability Zones for isolation and routing.
+
+5. **Q:** How do VPC endpoints reduce costs?  
+   **A:** VPC endpoints allow private access to AWS services without using NAT Gateway, saving data transfer and gateway costs.
+
+---
+
+## 💼 Interview Questions & Answers
+
+1. **Q:** How would you design a highly available web application in AWS?  
+   **A:** Use multiple AZs, launch EC2 instances in private subnets, use an ALB for load balancing, and enable database replication across AZs.
+
+2. **Q:** What is the difference between VPC Peering and Transit Gateway?  
+   **A:** VPC Peering is 1:1 connectivity between two VPCs. Transit Gateway is a hub that connects multiple VPCs and on-prem networks efficiently.
+
+3. **Q:** When should you use Direct Connect over VPN?  
+   **A:** Use Direct Connect for high-bandwidth, low-latency, and dedicated connectivity between on-premises and AWS. VPN is better for lower bandwidth or temporary connections.
+
+4. **Q:** Explain the difference between public and private subnets.  
+   **A:** Public subnets have direct internet access via IGW, while private subnets have no inbound internet access and typically use NAT for outbound connections.
+
+5. **Q:** How does CloudFront improve performance for global users?  
+   **A:** CloudFront caches content at edge locations near users, reducing latency and offloading traffic from the origin server.
