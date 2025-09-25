@@ -1,4 +1,4 @@
-# 🖥️ AWS VPC & CIDR Lecture Notes
+# 🖥️ AWS VPC & CIDR Learning Notes
 
 ## Table of Contents
 - [Introduction](#introduction)
