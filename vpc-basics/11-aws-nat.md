@@ -33,6 +33,54 @@ In this lesson, we will understand another important component of the **VPC**: t
 - NAT Gateway sits in a **public subnet** with a **public/elastic IP**.  
 - Acts as a **proxy** for private instances.  
 
+
+---
+---
+
+# 🌐 Proxy vs VPN in AWS (This is extra note)
+
+## 🔹 Proxy in AWS (Example: NAT Gateway / Proxy Server)
+- **NAT Gateway** acts like a **proxy** for instances in a **private subnet**.  
+- Private EC2 instances **cannot directly access the internet**.  
+- Instead, they **send traffic to the NAT Gateway**, which forwards the request to the internet.  
+- The response comes back through NAT → to the EC2 instance.  
+- ✅ NAT Gateway hides the **private instance’s IP address** and uses its own **public IP** → just like a proxy.  
+
+### 📌 Example use case:
+Your app servers in a private subnet need to **download OS updates** or fetch data from the internet.  
+They use the **NAT Gateway** as a proxy to go out, but outsiders **cannot directly connect back** to them.
+
+---
+
+## 🔹 VPN in AWS (Example: AWS Site-to-Site VPN / Client VPN)
+- **VPN** creates a **secure, encrypted tunnel** between **your on-premises network** and **your VPC**.  
+- Unlike a proxy, VPN covers **all traffic** between the two networks.  
+- Every packet is encrypted → ensuring **confidentiality and integrity**.  
+
+### 📌 Example use case:
+Your office network (on-premises) needs to connect securely to AWS.  
+You set up a **Site-to-Site VPN** between your office router and AWS Virtual Private Gateway.  
+Now, all your office computers can securely access AWS resources **as if they were on the same local network**.
+
+---
+
+## ✅ Key Comparison in AWS
+
+| Feature  | Proxy (NAT Gateway / Proxy Server) | VPN (AWS VPN) |
+|----------|------------------------------------|---------------|
+| **Scope** | Works for specific traffic (outbound internet) | Encrypts & tunnels all traffic between networks |
+| **Security** | ❌ No encryption (just IP masking) | ✅ Encrypted (secure tunnel) |
+| **Use Case** | Private subnet EC2 instances accessing internet | On-premises network securely connecting to AWS VPC |
+| **Example** | NAT Gateway, Squid Proxy | Site-to-Site VPN, Client VPN |
+
+---
+
+## 🎯 Final Takeaway
+- **Proxy = NAT Gateway (outbound only, no encryption)**  
+- **VPN = Secure tunnel (two-way, full encryption)**  
+
+
+---
 ---
 
 ## Routing via NAT Gateway
