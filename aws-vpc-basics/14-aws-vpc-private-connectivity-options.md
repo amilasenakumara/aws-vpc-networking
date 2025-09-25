@@ -529,11 +529,11 @@ Here are all the **VPC private connectivity options** discussed in this lecture:
 
 ---
 
-I hope things are clear and you're **enjoying this learning**.
+
 
 Now get ready to **do the labs**, and I'm sure you are going to have a **lot of fun**.
 
-Thanks for watching and stay tuned.
+
 
 
 
