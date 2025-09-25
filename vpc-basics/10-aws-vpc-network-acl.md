@@ -415,6 +415,58 @@ So either **explicit deny or implicit deny** with the star.
 
 In both the cases, this machine cannot reach to your EC2 instance, right?
 
+
+# Explicit Deny vs Implicit Deny in Network ACLs
+
+---
+
+## 1️⃣ Explicit Deny
+- **Definition:** A rule you **manually write** in the Network ACL to block traffic from a specific IP, port, or protocol.  
+- **Example:**  
+
+| Rule | Type     | Protocol | Port | Source        | Allow/Deny |
+|------|---------|---------|------|---------------|------------|
+| 101  | All IPv4 | All     | All  | 9.10.11.12/32 | **DENY**   |
+
+- **Behavior:**  
+  - When traffic comes from `9.10.11.12`, **rule 101 matches** and the traffic is **blocked immediately**.  
+  - You **intentionally created this rule** to deny that traffic.  
+
+**✅ Key point:** You specifically instructed the ACL to deny this traffic.
+
+---
+
+## 2️⃣ Implicit Deny
+- **Definition:** Traffic that is **not explicitly allowed by any rule** is automatically denied by the **default “*” rule** at the end of the ACL.  
+- **Example:**  
+
+| Rule | Type     | Protocol | Port | Source        | Allow/Deny |
+|------|---------|---------|------|---------------|------------|
+| 100  | TCP      | 80      | 80   | 1.2.3.4/32    | **ALLOW**  |
+| *    | All IPv4 | All     | All  | 0.0.0.0/0     | **DENY**   |
+
+- **Behavior:**  
+  - Any traffic **not from 1.2.3.4** will **hit the default “*” rule** and be **denied automatically**.  
+  - You didn’t write a deny rule for it, but the ACL **blocks it anyway**.  
+
+**✅ Key point:** The ACL has a built-in final deny rule (the “star rule”) that blocks all unspecified traffic.
+
+---
+
+## Summary Table
+
+| Type          | How It Happens                   | Example Behavior                     |
+|---------------|---------------------------------|-------------------------------------|
+| **Explicit Deny** | You write a rule to deny traffic | DENY traffic from IP 9.10.11.12    |
+| **Implicit Deny** | Default star rule at the end     | DENY all other traffic not explicitly allowed |
+
+---
+
+**In short:**  
+- **Explicit Deny** = You told it to block.  
+- **Implicit Deny** = The ACL blocks by default if no rule matches.
+
+
 ---
 
 Okay, now let's take another example.
