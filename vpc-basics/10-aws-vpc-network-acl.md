@@ -243,6 +243,14 @@ So if I want to show you an example of **network ACL rules**.
 
 So these are the simple rules for the **inbound traffic**.
 
+| Rule | Type           | Protocol | Port | Source           | Allow/Deny |
+|------|----------------|---------|------|-----------------|------------|
+| 100  | All IPv4 traffic | All     | All  | 180.151.138.43/32 | DENY       |
+| 101  | HTTPS          | TCP     | 443  | 0.0.0.0/0       | ALLOW      |
+| *    | All IPv4 traffic | All     | All  | 0.0.0.0/0       | DENY       |
+
+
+
 Now here you can see that the first entry that you see here with the **rule number 100**, it says that
 
 all the **IPv4 traffic** from this particular IP address I want to **deny**, because maybe your security
