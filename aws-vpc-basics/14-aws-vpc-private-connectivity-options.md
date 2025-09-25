@@ -96,7 +96,7 @@
 2. **Q:** Is VPC peering transitive?  
    **A:** No, peering is point-to-point and not transitive.
 
-# 🔗 VPC Peering and Transitive Routing
+## 🔗 Explanation - VPC Peering and Transitive Routing
 
 ## ❓ What does "transitive" mean in networking?
 - **Transitive connectivity** means:  
@@ -155,7 +155,7 @@ VPC-A <----> VPC-B <----> VPC-C
 - **Transit Gateway** → Acts as a hub, supports **transitive routing** between all connected VPCs and networks.
 
 
-# 🔎 In contrast → If you use a Transit Gateway, it supports transitive routing. That means if A attaches to the TGW, and B attaches, and C attaches, then A can reach C via TGW without direct peering.
+### 🔎 In contrast → If you use a Transit Gateway, it supports transitive routing. That means if A attaches to the TGW, and B attaches, and C attaches, then A can reach C via TGW without direct peering.
 
 ---
    
