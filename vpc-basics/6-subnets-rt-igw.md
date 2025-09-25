@@ -3,7 +3,7 @@
 This repository contains notes on **AWS VPC subnets, routing, and internet gateway** concepts.  
 It explains **how traffic flows** within a VPC and between subnets and the internet.Subnets, Route Tables and Internet Gateway
 
-🔗[Subnets, Route Tables and Internet Gateway]()
+🔗[Subnets, Route Tables and Internet Gateway](https://github.com/amilasenakumara/aws-vpc-networking/blob/a216052de402202780f3773b2f8785611fe29572/images/subnets-rt-igw.png)
 
 ---
 
