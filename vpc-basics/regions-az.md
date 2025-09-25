@@ -1,1 +1,0 @@
-🖼️Regions and AZs 🖼️
