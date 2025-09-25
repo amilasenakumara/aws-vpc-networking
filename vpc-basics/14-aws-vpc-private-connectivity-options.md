@@ -167,7 +167,6 @@
 
 # VPC Private Connectivity Options
 
-Hi.
 
 So we are now reached to the interesting topic which is **VPC Private Connectivity options**.
 
