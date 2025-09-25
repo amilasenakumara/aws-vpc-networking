@@ -1,6 +1,6 @@
 So let's start with very first lecture that is Amazon VPC.
 
-VPC is virtual private cloud.
+☁️ VPC is virtual private cloud. ☁️
 
 And it means that you get your own private networking space inside AWS where you can launch machines.
 
@@ -85,7 +85,7 @@ So it is very well possible that they are part of the same Vlan network.
 
 So in this course in particular, we will be focusing more on the AWS side of the networking and how
 
-[we translate this network to AWS VPC network.]()
+[we translate this network to AWS VPC network.](https://github.com/amilasenakumara/aws-vpc-networking/blob/18fc92f133bf3801dd14dbb8cebc97638a24364c/images/physical-cloud.png)
 
 But if you are interested in understanding very basics of computer networking, then I will highly recommend
 
@@ -99,13 +99,9 @@ things are not very different.
 
 Ultimately, whatever you see on the left is represented as a VPC in AWS world.
 
-So you can have similar topology that you have in your physical network into the AWS in the form of
+So you can have similar topology that you have in your physical network into the AWS in the form of VPC.
 
-VPC.
-
-And once you have this VPC as your own private network, you can then connect to the resources inside
-
-VPC.
+And once you have this VPC as your own private network, you can then connect to the resources inside VPC.
 
 When I say resources, I mean EC2 machines or databases.
 

@@ -5,7 +5,7 @@
 
 So let's start this course.
 
-[overview of VPC and AWS networking services]()
+[overview of VPC and AWS networking services](https://github.com/amilasenakumara/aws-vpc-networking/blob/18fc92f133bf3801dd14dbb8cebc97638a24364c/images/course-overview.png)
 
 Now I want to start this course with overview of VPC and AWS networking services.
 
