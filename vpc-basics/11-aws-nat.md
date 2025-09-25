@@ -168,3 +168,238 @@ In this lesson, we will understand another important component of the **VPC**: t
 
 ---
 
+# AWS NAT Gateway Lecture Notes - Complete Lesson
+
+So now in this lecture let's understand another important component of the VPC that is **Nat gateway**.
+
+Okay.
+
+Now if you go back to our previous lectures around the **public subnets** and the **private subnets**, we understood
+
+that the **instances in public subnet can communicate with the internet directly**.
+
+And the **route table of the public subnet has route to the internet via the internet gateway**.
+
+And **this traffic is allowed now**.
+
+With respect to the **private subnet**, we know that **private subnet route table doesn't have route to the
+
+internet gateway**.
+
+And there is only a **local route** which allows the communication within the VPC, which means this instance
+
+in the private subnet **cannot directly communicate with the internet**.
+
+So **this traffic is not allowed**.
+
+Now I'm just trying to represent the same network architecture in a different way.
+
+So again there is a **VPC public subnet**.
+
+And there is an **instance with the public IP**.
+
+And then there is another subnet which is a **private subnet with the instance with only the private IP**.
+
+Now if this is your network architecture, your **instance B could be your application server**.
+
+And often **application server has to make some outbound API calls or download some packages from the
+
+internet**.
+
+But given this situation the question is **can this instance B access an internet?**
+
+So obviously based on what we learned, the answer is **no**.
+
+**Instance B cannot communicate with the internet**.
+
+Now what are the reasons due to which this is not possible.
+
+So as you know, the first reason is that the subnet in which **instance B is launched is not a public
+
+subnet**, it's a **private subnet**.
+
+So there is **no route to internet**.
+
+And second, even if this subnet would have been a public subnet, still this communication wasn't possible
+
+because **instance B does not have a public IP**.
+
+So we understood that these are the **essential requirements for any communication with the internet**.
+
+So now the basic question is then **how do you allow instance B to communicate to the internet**.
+
+So as you might have guessed the solution for this is having the **Nat component**, right?
+
+So in AWS world there is something called a **Nat gateway** which is **managed Nat device**, Nat is **network
+
+address translation**.
+
+And the role of the **Nat** is to **allow the outbound internet access to the instances in the private subnet**.
+
+So **Nat gateway itself sits into the public subnet** because it has to communicate with the internet directly.
+
+It has a **public or elastic IP**.
+
+And then all the traffic which initiates from **instance B goes via this Nat gateway**.
+
+So it acts as kind of **proxy for your EC2 instance P**.
+
+So here, in order to route all the outbound traffic through this **Nat gateway**, you should modify the
+
+**route table of this subnet B** and say all the traffic to the internet should go via this **Nat gateway**.
+
+Once you do that and if you hit some internet IP address, the traffic will first go to the **Nat gateway**
+
+and then from there **Nat gateway sends it to the internet**.
+
+And the same thing happens for the **return traffic**.
+
+The internet will return the traffic to the **Nat gateway IP address**, which is the **public IP address**.
+
+And then **Nat gateway will send that packet back to the instance** which has originally sent this packet
+
+to the **Nat gateway**.
+
+And this is how the **entire traffic flows**.
+
+Okay.
+
+So at high level I hope that is clear.
+
+Now let's take an example and see step by step, what happens when **instance B tries to reach out to
+
+some internet IP address through the Nat gateway**.
+
+So we have **instance P with the private IP address as 10.1.1.11**.
+
+And let's assume that it is trying to reach to some **internet IP address 33.44.55.66**.
+
+So of course **instance B will create an IP packet** which has a **source as its own IP address** and **destination
+
+as this internet IP address**.
+
+Now, as **instance B sends this packet**, it will go to the **route table of instance B that is subnet B**,
+
+and it will see the traffic.
+
+Matches 0.0.0.0/0 and it should go to the **Nat gateway**.
+
+So this packet is going now to the **Nat gateway**.
+
+Now **Nat gateway understands that traffic is received from instance B** and now it has to forward it to
+
+the **internet**.
+
+Now here before it sends it to the internet, the **Nat has to tell internet that where to return that
+
+traffic and that return address is Nat gateway's public IP address**.
+
+So what **Nat does** is now this is called **network address translation**.
+
+What it does is it **replaces the source IP of instance B with its own source IP**.
+
+So that **internet can return the traffic to that IP address**.
+
+So it just replaces the **source with its own source IP address**.
+
+And now this packet goes from the **Nat gateway to the internet**.
+
+Now **Nat has access to the internet** because **Nat is sitting in a public subnet**.
+
+And you can see that there is a **route which goes through the internet gateway**.
+
+Okay.
+
+So the packet reaches the **internet**.
+
+So at this moment now the **internet site will send the traffic back**.
+
+That is a **return traffic**.
+
+And in this case it will have **source as its own IP address** and **destination as the Nat gateway IP address**.
+
+Right.
+
+So it sends it back.
+
+It comes through the **internet gateway** to the **Nat gateway**.
+
+And whenever **Nat gateway sends the traffic to the internet**, it **maintains a table** which says this packet
+
+was originally received by this **EC2 machine**.
+
+So it knows that this packet was originally sent by this particular **EC2 instance B** because it maintains
+
+that in a table.
+
+And now after it gets this **return packet back**, it will just again replace the **destination IP address**
+
+as the **instance B address**.
+
+And at this point, the **traffic then goes back from the Nat gateway to the EC2 instance**.
+
+So this is how ultimately the **traffic flows back from the internet to EC2 instance**.
+
+So this is how **entire flow works**.
+
+So **Nat is network address translation** which actually **allows the outbound internet access to your machine
+
+inside the private subnet**.
+
+Now at this point you must be wondering **can anybody from the internet reach to my EC2 instance B if
+
+I have a Nat gateway?**
+
+So the answer is **no**, because if somebody tries to reach to the **private IP of instance B, which is
+
+10.1.1.11**, it is **not resolvable over the internet**.
+
+Nobody knows this address because it's **inside a private VPC**.
+
+So it is **not routable IP address**.
+
+Maximum people can reach to the **Nat gateway which has a public IP address**, but they can't go beyond
+
+that **Nat gateway IP address**.
+
+So that is the functionality of the **Nat**.
+
+And I hope it is clear to you.
+
+---
+
+### Features of NAT Gateway
+
+- **AWS managed NAT device**  
+- Provides **higher bandwidth**  
+- Fully managed by AWS  
+- No need to worry about **availability and scalability**  
+- Typically used so **machines inside the private subnet are not exposed to the internet directly**  
+- **Charged per hour** and based on **data sent**  
+- Supports **TCP, UDP, and ICMP (ping traffic)**  
+- **No security groups**, but **network ACLs still apply**  
+- **Ephemeral port range** for outbound connections  
+- Requires **publicly routable IP** (Elastic IP preferred)  
+- **High availability** depends on **availability zone (AZ)**  
+
+> To achieve **high availability**, multiple NAT gateways across multiple AZs are recommended.  
+
+- Tradeoff between **cost and availability**  
+
+---
+
+So that's it about the **NAT gateways**.
+
+Again, **very important component of the VPC**.
+
+Whenever we talk about **providing outbound internet access to the machine inside the private subnet**, **NAT gateways** are used.
+
+---
+
+Now we will also see the **NAT EC2 instance**, which means what if you **don't want to use AWS managed NAT gateways** and rather **use your own EC2 machine as a NAT**?
+
+This is a **valid case** and you can definitely do that.
+
+So in the next lecture let's understand **NAT instance**.
+
+So that's it for this lecture.
