@@ -381,6 +381,220 @@ So I hope that is clear and you will remember this.
 
 ---
 
+# AWS Network ACLs: Detailed Examples and Concepts
+
+With that, let's go forward.
+
+Now here is another example.
+
+Instead of now this 1.2.3.4, I have another host with the IP address of 9.10.11.12.
+
+Now, if it tries to reach to the same EC2 instance and we haven't modified our inbound and outbound rules, then the traffic will reach here.
+
+And of course it try to match any of the rule numbers starting with the one it says 100. **Rule is for this IP which is not this IP.**
+
+So this rule is not evaluated.
+
+And then it will ultimately be **denied because this rule matches which says all the IPv4 traffic should be denied unless the source IP is this.**
+
+Right.
+
+So this is an **implicit deny**.  
+
+This **star rule** matches and the traffic is dropped.
+
+Now this is one way.
+
+Other way is if you want to **explicitly deny traffic from this machine** what you can do, you can just add one more rule and say traffic from this particular IP.  
+
+I want to **deny**.
+
+Now again, if this machine tries to reach to your EC2 machine, this time, this rule number 101 will be evaluated and the traffic will be **denied**.  
+
+So either **explicit deny or implicit deny** with the star.  
+
+In both the cases, this machine cannot reach to your EC2 instance, right?
+
+---
+
+Okay, now let's take another example.
+
+Now I have this host 9.10.11.12.
+
+And I have also this inbound rule which says **traffic from this host should be allowed**.  
+
+Right? This this particular rule.
+
+Now if this hits the **Network ACL rule**, then this **rule number 200** will be matched.  
+
+**Traffic will reach to port 80 of the EC2 machine, and now the return traffic will go back to the outbound rule.**
+
+Now here, if you see there is **no outbound rule which says the traffic should go to this particular IP address**, right.
+
+So in this case **return traffic is not allowed**.  
+
+So the **packet is dropped**.  
+
+So this **network flow doesn't work** like that.  
+
+Obviously the option for you is now to **open also the outbound traffic** here using outbound rule.  
+
+So for that you will just add another rule.  
+
+Here, you say the **traffic to this particular IP address should be allowed**.  
+
+And as I said you need to provide a **port range which is ephemeral port range**.  
+
+Or you can say **all**. Right, now once you do that, you are now able to get the **inbound traffic and also the return traffic going back to your machine.**  
+
+So remember that you have to add this kind of rules for the **network ACL**.
+
+---
+
+Now let's look at some more scenarios and then we'll compare both **network ACL** and **security groups**.
+
+So in this case let's now understand about the **outbound traffic**.  
+
+That means **traffic which is originated by your EC2 instance**.
+
+So as I said whenever EC2 instance now originates the traffic, again it doesn't use port 80 of this machine.  
+
+It uses some random port that is **ephemeral port for outbound traffic**.
+
+So this is a scenario where from EC2 you are trying to download something, right?  
+
+So it is not a workstation which is connecting to your machine and you are returning the traffic.  
+
+It is like your machine is **initiating that outbound traffic**.
+
+So again, if you do that, of course the traffic will first reach the **network ACL**.  
+
+It will check the **outbound rules**.  
+
+Now in this particular case I don't have any allow rules in the outbound rules.  
+
+That means the traffic will be **simply dropped**, right. This rule will be matched.  
+
+But if I want to go to this particular IP address, which is some IP on the internet, of course I need to **allow the outbound rule** in this, right?
+
+So what I'll do is I'll add one more rule which says I want to go to this internet and this is my target port of this machine, which is **port 80**, because where I'm trying to connect probably run on port 80 or 443 depending on HTTP or HTTPS.  
+
+And I need to explicitly define that port.  
+
+So in this case the **outbound traffic will be allowed** to go to this.
+
+Now again, because of the **stateless nature of network ACL**, you need to think **will return traffic be allowed?**  
+
+Now just looking at this inbound rules, you know that there is **no inbound rule to allow traffic coming back from internet** to your EC2 machine, right?  
+
+So that means **return traffic will be blocked again**.  
+
+And if you want to allow this return traffic, you know what to do, right?  
+
+You need to add another rule which says the **return traffic from this particular instance should be allowed**.  
+
+Right.  
+
+And you know that this port here should be the port here, right?  
+
+You are not reaching to the port 80 of the EC2 machine.  
+
+You are reaching back to the port which was used to **initiate that outbound connection**.  
+
+And that's where you need to have some **ephemeral port range here**, which will allow this traffic to go back.  
+
+So again, this kind of port range, or for simplicity, you can just use **all**, and the traffic will reach back to your EC2 machine.  
+
+So this is a flow for the **outbound traffic initiated from your EC2 instance**, right?  
+
+I know that it is a little complicated, but if you go through this video again, if there is a doubt, I'm sure it will be clarified.
+
+---
+
+Now let's look at the **default network ACL rules**.  
+
+So there are **inbound rules and the outbound rules**.  
+
+So you can see that by default **network ACL** will have these rules which **allow the inbound and the outbound rules**.  
+
+So **all the traffic can come in and go back from where it is coming**.  
+
+Right.  
+
+So this is **allowed**.  
+
+Similarly **all the outbound traffic is allowed** because this rule is there.  
+
+And again the **return traffic will be matched with this**.  
+
+Right.  
+
+So that's where for **network ACL** you don't have to do anything when you create your subnet.  
+
+Because **default network ACL will allow both inbound and outbound traffic**.  
+
+So this is for **IPv4**.  
+
+Similarly, for **IPv6** there will be additional rules just that.  
+
+Instead of 0.0.0.0, there will be this notation to represent IPv6 addresses.  
+
+So if your VPC has enabled both **IPv4 and IPv6 addresses**, then automatically these rules will be added to the **network ACL**.
+
+---
+
+Okay. So that's it about the **network ACL**.
+
+Now quickly let's look at the difference between the **security groups and network ACL**.
+
+- Security group works at the **EC2 instance level**, which actually means any level that is elastic network interface.  
+- Network ACL operates at the **subnet level**.  
+- Security Group only has **allow rules**, and network ACL has **both allow and deny rules** with respect to the traffic.  
+- **Statefulness:** Security group has **stateful traffic**, which means **return traffic is automatically allowed**, but network ACL has **stateless traffic**, which means you have to **explicitly allow the return traffic** through the outbound rules.  
+- **Rules evaluation:** Security group evaluates **all rules before making a decision**, but in case of network ACL, rules are **numbered**, and the **smallest number rules are evaluated first**. As soon as a rule is matched, the **rest of the rules are not evaluated**.  
+
+**Major difference:**  
+- Security group = stateful, allow only.  
+- Network ACL = stateless, allow + deny, numbered evaluation.  
+
+---
+
+Now there are certain limits, and these limits always keep changing:  
+
+- How many rules you can have in **security groups**.  
+- How many **security groups** you can attach to your machine.  
+- How many rules you can have in **network ACL**.  
+
+I don't want to put those numbers here because they are always changing.  
+
+If you want to know those numbers, you can visit the **VPC quota page in AWS documentation** to verify.  
+
+---
+
+With that, I hope the difference is clear between **security groups and network ACL**, and you are very well able to **troubleshoot** if the network traffic is **not reaching to EC2 machine** or it is **not going out to the destination**.
+
+---
+
+Now, before we wrap up this lecture, I just wanted to quickly show you in **AWS console** how **network ACL looks**, and then we'll move to the next topic.  
+
+- Go to **VPC**.  
+- Every AWS region will have **default VPCs**.  
+- Additionally, you might have created your own.  
+- Select a **default VPC** and note down the **VPC ID**.  
+- Go to **subnets** and filter by this **VPC ID**.  
+- Select a subnet and go to the **network ACL** tab.  
+- You will see the **default network ACL rules**:  
+  - Default rule **allows all inbound traffic**.  
+  - Default rule **allows all outbound traffic**.  
+  - There is also a **default deny rule at the end**.  
+
+So this is essentially the **network ACL**, and it will become clearer with exercises.  
+
+---
+
+
+
+
 *(The lecture continues exactly like this, highlighting all the critical terms like “**network ACL**”, “**stateless**”, “**ephemeral ports**”, “**rule numbers**”, “**EC2 instance**”, etc. for all sections including examples, default rules, security group vs ACL comparison, and AWS console walkthrough.)*
 
 
