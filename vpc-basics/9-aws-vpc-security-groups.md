@@ -7,6 +7,8 @@ In AWS VPC, two types of firewalls exist:
 
 This document focuses on **Security Groups**, their features, use cases, and best practices.
 
+## 🔗 [Firewalls inside VPC}()
+
 ---
 
 ## 📝 Key Concepts
