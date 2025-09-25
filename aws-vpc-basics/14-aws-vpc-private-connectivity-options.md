@@ -94,7 +94,71 @@
    **A:** Amazon S3 and DynamoDB.  
 
 2. **Q:** Is VPC peering transitive?  
-   **A:** No, peering is point-to-point and not transitive.  
+   **A:** No, peering is point-to-point and not transitive.
+
+# 🔗 VPC Peering and Transitive Routing
+
+## ❓ What does "transitive" mean in networking?
+- **Transitive connectivity** means:  
+  If **A can talk to B**, and **B can talk to C**, then **A can also talk to C (through B)**.
+
+👉 **Example in real life:**  
+If you are friends with **John**, and John is friends with **Mary**, then **you automatically become friends with Mary**.  
+That’s **transitive friendship**.
+
+---
+
+## 🚫 Is VPC Peering Transitive?
+- **No. VPC Peering is not transitive.**
+- It is strictly **point-to-point connectivity**.
+
+### Example:
+- If **VPC-A** is peered with **VPC-B**, and **VPC-B** is peered with **VPC-C**:
+  - ✅ A ↔ B communication works
+  - ✅ B ↔ C communication works
+  - ❌ A ↔ C does **not** work unless **you explicitly create a peering connection between A and C**
+
+---
+
+## 🔑 Why is Peering Non-Transitive?
+- Each peering relationship is **explicit** (manually created).
+- AWS enforces this to keep routing **simple, secure, and predictable**.
+- If you want all VPCs to talk, you must peer them **individually**.
+
+---
+
+## ✅ Visual Example
+
+VPC-A <----> VPC-B <----> VPC-C
+
+
+
+- A ↔ B ✅  
+- B ↔ C ✅  
+- A ↔ C ❌  
+
+---
+
+## 🆚 VPC Peering vs Transit Gateway
+
+| Feature               | VPC Peering ❌ | Transit Gateway ✅ |
+|------------------------|----------------|---------------------|
+| **Transitive Routing** | No             | Yes                 |
+| **Connection Type**    | Point-to-Point | Hub-and-Spoke       |
+| **Best For**           | Few VPCs       | Many VPCs & hybrid  |
+| **Complexity**         | Increases with more VPCs | Simplified with single TGW |
+
+---
+
+## 📌 Key Takeaway
+- **VPC Peering** → Simple, point-to-point, **non-transitive**.  
+- **Transit Gateway** → Acts as a hub, supports **transitive routing** between all connected VPCs and networks.
+
+
+# 🔎 In contrast → If you use a Transit Gateway, it supports transitive routing. That means if A attaches to the TGW, and B attaches, and C attaches, then A can reach C via TGW without direct peering.
+
+---
+   
 
 3. **Q:** What AWS service simplifies multi-VPC connectivity?  
    **A:** Transit Gateway.  
