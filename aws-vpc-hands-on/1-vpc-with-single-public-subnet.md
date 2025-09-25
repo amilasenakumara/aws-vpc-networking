@@ -16,7 +16,7 @@ This exercise focuses on **creating a VPC with a single public subnet**, launchi
 
 ---
 
-## 🛠️ Step-by-Step Workflow
+## 🛠️ Step-by-Step Workflow | [High level steps]()
 
 1. **Prerequisites**
    - AWS account activated.
