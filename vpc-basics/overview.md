@@ -1,6 +1,6 @@
 📚 Overview of AWS Networking
 
-[Which all AWS networking services you should know?](images/aws-networking-services.png)
+[Which all AWS networking services you should know?](https://github.com/amilasenakumara/aws-vpc-networking/blob/2ad8add1277c0bcb730e2a7ab738a111a6c2afb6/images/aws-networking-services.png)
 
 
 So let's start this course.
