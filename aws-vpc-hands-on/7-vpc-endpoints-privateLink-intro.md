@@ -2,7 +2,7 @@
 
 This document provides a detailed summary of **AWS VPC Endpoints and PrivateLink**, including their use cases, types, benefits, and cost considerations. It also contains exam and interview questions for easy review.
 
-![AWS VPC Endpoints and PrivateLink](?raw=true)
+![AWS VPC Endpoints and PrivateLink](https://github.com/amilasenakumara/aws-vpc-networking/blob/8e8ca57a0b0efdd99aac113f76c712369eb2510d/images/vpc-endpoints-privateLink-intro.png?raw=true)
 
 
 ---
