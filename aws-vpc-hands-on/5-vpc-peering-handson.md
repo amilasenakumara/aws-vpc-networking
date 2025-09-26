@@ -2,7 +2,7 @@
 
 This exercise demonstrates **VPC peering**, allowing two VPCs to communicate privately without exposing EC2 instances to the internet.
 
-![VPC peering](?raw=true)
+![VPC peering](https://github.com/amilasenakumara/aws-vpc-networking/blob/addc7347079f688c4f6723f87300ddacd97bec00/images/exercise-vpc-peering.png?raw=true)
 
 ---
 
