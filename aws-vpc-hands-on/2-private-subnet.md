@@ -4,7 +4,7 @@ This exercise builds upon the previous lab where we created a **public subnet** 
 Now, we extend it by creating a **private subnet** with an EC2 instance (`EC2-B`) that is only reachable through the public EC2.  
 
 
-![Exercise private Subnet](?raw=true)
+![Exercise private Subnet](https://github.com/amilasenakumara/aws-vpc-networking/blob/f06f21313729adea410cf700dea55934b158ac46/images/exercise-private-subnet.png?raw=true)
 
 ---
 
