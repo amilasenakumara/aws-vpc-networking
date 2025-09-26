@@ -2,6 +2,8 @@
 
 This exercise focuses on **creating a VPC with a single public subnet**, launching an **EC2 instance**, and accessing it from your workstation via **SSH**.  
 
+![Exercise Public Subnet](https://github.com/amilasenakumara/aws-vpc-networking/blob/ad5b08fdfd955b07f46973ab85549738ceffc877/images/exercise-public-subnet.png?raw=true)
+
 ---
 
 ## 📌 Key Concepts Covered
@@ -16,9 +18,7 @@ This exercise focuses on **creating a VPC with a single public subnet**, launchi
 
 ---
 
-## 🛠️ Step-by-Step Workflow | 
-
-![High level steps](https://github.com/amilasenakumara/aws-vpc-networking/blob/ad5b08fdfd955b07f46973ab85549738ceffc877/images/exercise-public-subnet.png?raw=true)
+## 🛠️ Step-by-Step Workflow 
 
 1. **Prerequisites**
    - AWS account activated.
