@@ -64,8 +64,12 @@ This document explains how to enable **outbound internet access** for instances 
                 Private Subnet
                     (EC2-B)
 
+```
 
-📘 Exam Questions
+---
+
+
+##📘 Exam Questions
 Q1. Why can’t EC2-B (in a private subnet) access the internet directly?
 
 Answer: Because its route table has no path to the internet (no 0.0.0.0/0 → IGW).
@@ -86,7 +90,7 @@ Q5. Is NAT Gateway free-tier eligible?
 
 Answer: ❌ No, it has hourly and data transfer costs.
 
-💼 Interview Questions
+##💼 Interview Questions
 Q1. Difference between NAT Gateway and Internet Gateway?
 
 Answer:
@@ -111,7 +115,7 @@ Q5. What happens if NAT Gateway fails?
 
 Answer: Instances in private subnets lose internet connectivity unless a backup NAT Gateway in another AZ is configured.
 
-🎓 Advanced Exam Questions
+##🎓 Advanced Exam Questions
 Q1. Can NAT Gateway allow inbound internet connections?
 
 Answer: ❌ No, it only allows outbound traffic initiated from private instances.
@@ -136,7 +140,7 @@ Q5. How can you design for NAT Gateway high availability?
 
 Answer: Deploy NAT Gateways in multiple AZs and configure private subnet route tables per AZ.
 
-🧑‍💻 Advanced Interview Questions
+##🧑‍💻 Advanced Interview Questions
 Q1. Can a NAT Gateway span across multiple Availability Zones?
 
 Answer: ❌ No, NAT Gateway is AZ-specific. You must deploy one in each AZ for HA.
