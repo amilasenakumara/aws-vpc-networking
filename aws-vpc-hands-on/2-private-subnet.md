@@ -3,6 +3,9 @@
 This exercise builds upon the previous lab where we created a **public subnet** with one EC2 instance (`EC2-A`).  
 Now, we extend it by creating a **private subnet** with an EC2 instance (`EC2-B`) that is only reachable through the public EC2.  
 
+
+![Exercise private Subnet](?raw=true)
+
 ---
 
 ## 📝 Point-wise Summary  
